@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+{{ include "service.labels.standard" . | indent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+{{ include "service.labels.standard" . | indent 6 }}
+  template:
+    metadata:
+      labels:
+        application: {{ .Chart.Name | quote }}
+{{ include "service.labels.standard" . | indent 8 }}
+      annotations:
+{{ include "service.pod.annotations" . | indent 8 }}
+    spec:
+      containers:
+        - name: {{ .Release.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Chart.Version }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          env:
+            - name: DB_URL
+              value: "swetha-food-ordering-system-mysql-headless:3306"
+            - name: DB_SCHEMA
+              value: "{{ .Values.mysql.auth.database }}"
+            - name: DB_PASSWORD
+              value: "{{ .Values.mysql.auth.rootPassword }}"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 6
+            periodSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 3
+          resources:
+{{ toYaml .Values.resources | indent 12 }}

@@ -1,0 +1,30 @@
+# Default values for manager-service.
+
+replicaCount: 1
+
+image:
+  repository: looped/swetha-food-ordering-system
+  pullPolicy: IfNotPresent
+
+service:
+  enable: false
+  name: food-ordering-svc
+  type: ClusterIP
+  port: 8080
+
+ingress:
+  enable: false
+  host: ordering.local.com
+
+resources:
+  limits:
+    cpu: 1000m
+    memory: 2Gi
+  requests:
+    cpu: 512m
+    memory: 1Gi
+
+mysql:
+  auth:
+    database: test
+    rootPassword: test
