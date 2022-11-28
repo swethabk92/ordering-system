@@ -14,7 +14,7 @@ com/looped/foodordering/service/impl/OrderServiceImpl.class
 com/looped/foodordering/repository/MenuRepository.class
 com/looped/foodordering/vo/OrderDetailVo.class
 com/looped/foodordering/controller/OrderController.class
-com/looped/foodordering/service/IMenuService.class
 com/looped/foodordering/service/IOrderService.class
+com/looped/foodordering/service/IMenuService.class
 com/looped/foodordering/controller/HealthController.class
 com/looped/foodordering/model/Order.class
