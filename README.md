@@ -1,5 +1,12 @@
 # Swetha-food-ordering-system
-
+## Pre-Requisites:
+Tools to be installed:
+- Docker/Vagrant/HyperV (I am using Docker)
+- Helm
+- Kubectl 
+- java8
+- maven 3.8.1
+- git
 ## Installation Guide
 
 ### Prepare the Application 
